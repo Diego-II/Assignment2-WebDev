@@ -38,7 +38,7 @@
     <div class="w3-content">
         <h1>Agregar Medicos</h1>
 
-    <form method="post"  onsubmit="return docValidator()" id="form_doc" name = "form_doc">
+    <form method="post" action="insert_doc.php" enctype="multipart/form-data"  onsubmit="return docValidator()" id="form_doc" name = "form_doc">
         <table>
             <thead>
                 <tr>
@@ -52,7 +52,7 @@
                     Nombre:
                 </td>
                 <td>
-                    <input  type="text" placeholder="Nombre"  name="nombre-medico ">
+                    <input  type="text" placeholder="Nombre" id = "nombre-medico" name = "nombre-medico">
                 </td>
             </tr>
             <tr>
@@ -136,27 +136,27 @@
             <tr id="foto2" style="display: none;">
                 <td></td>
                 <td>
-                    <input  type="file" name="foto-medico" style="display: block;">
+                    <input  type="file" name="foto-medico-2" style="display: block;">
                 </td>
                 
             </tr>
             <tr id="foto3" style="display: none;">
                 <td></td>
                 <td>
-                    <input  type="file" name="foto-medico" style="display: block;">>
+                    <input  type="file" name="foto-medico-3" style="display: block;">
                 </td>
                 
             </tr>
             <tr id="foto4" style="display: none;">
                 <td></td>
                 <td>
-                    <input  type="file" name="foto-medico" style="display: block;">
+                    <input  type="file" name="foto-medico-4" style="display: block;">
                 </td>
             </tr>
             <tr id="foto5" style="display: none;">
                 <td></td>
                 <td>
-                    <input  type="file" name="foto-medico" style="display: block;">
+                    <input  type="file" name="foto-medico-5" style="display: block;">
                 </td>
             </tr>
             <tr>
@@ -168,7 +168,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <button type="submit">Finalizar</button>
+                    <button type="submit" name="submitDoc">Finalizar</button>
                 </td>
 
             </tr>
