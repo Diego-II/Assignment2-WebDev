@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Agregar Medicos</title>
+    <link rel="stylesheet" href="estilos_docs.css">        
+    <script src = "regionycomuna.js"></script>
+    <script src = "especialidad.js"></script>
+    <script src = "fotos.js"></script>
+    <script src="validador.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="Inicio.html" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
+      <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Medicos</a>
+      <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Solicitud</a>
+      <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
+    </div>
+  
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
+      <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-padding-large">Agregar Medicos</a>
+      <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-padding-large">Agregar Solicitud</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <h1>Agregar Medicos</h1>
+
+    <form method="post"  onsubmit="return docValidator()" id="form_doc" name = "form_doc">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tr>
+                <td>
+                    Nombre:
+                </td>
+                <td>
+                    <input  type="text" placeholder="Nombre"  name="nombre-medico ">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Region:
+                </td>
+                <td>
+                    <select id="regiones" name = "region-medico"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Comuna:
+                </td>
+                <td>
+                    <select id="comunas" name = "comuna-medico"></select>  
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telefono:
+                </td>
+                <td>
+                    <input class="w3-input w3-section w3-border" type="number" placeholder="Telefono" name="celular-medico">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mail:
+                </td>
+                <td>
+                    <input  type="text" placeholder="Email"  name="email-medico">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Twitter:
+                </td>
+                <td>
+                    <input  type="text" placeholder="@usuario-Twitter" name="twitter-medico">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Experiencia:
+                </td>
+                <td>
+                    <input class="w3-input w3-section w3-border" type="text" placeholder="Experiencia"  name="experiencia-medico">
+                </td>
+            </tr>
+            <tr>
+                <td>Ingrese especialidades:</td>
+                <td><select id="especialidad" name="especialidades-medico" onchange="sigespec('especialidades2');"></select></td>
+            </tr>
+                
+            <tr id="especialidades2" style="display: none;">
+                <td></td>
+                <td><select id="especialidad2" name="especialidades-medico-2"  onchange="sigespec('especialidades3');"></select></td>
+            </tr>
+                
+            <tr id="especialidades3" style="display: none;">
+                <td></td>
+                <td><select id="especialidad3" name="especialidades-medico-3"  onchange="sigespec('especialidades4');"></select></td>
+            </tr>
+                
+            <tr id="especialidades4" style="display: none;">
+                <td></td>
+                <td><select id="especialidad4" name="especialidades-medico-4"  onchange="sigespec('especialidades5');"></select></td>
+            </tr>
+        
+            <tr id="especialidades5" style="display: none;">
+                <td></td>
+                <td><select id="especialidad5" name="especialidades-medico-5" ></select></td>
+            </tr>
+            <tr>
+                <td>Adjuntar Imagen:</td>
+                <td>
+                    <input id="foto1" type="file" name="foto-medico" style="display: block;">
+                </td>
+            </tr>
+            <tr id="foto2" style="display: none;">
+                <td></td>
+                <td>
+                    <input  type="file" name="foto-medico" style="display: block;">
+                </td>
+                
+            </tr>
+            <tr id="foto3" style="display: none;">
+                <td></td>
+                <td>
+                    <input  type="file" name="foto-medico" style="display: block;">>
+                </td>
+                
+            </tr>
+            <tr id="foto4" style="display: none;">
+                <td></td>
+                <td>
+                    <input  type="file" name="foto-medico" style="display: block;">
+                </td>
+            </tr>
+            <tr id="foto5" style="display: none;">
+                <td></td>
+                <td>
+                    <input  type="file" name="foto-medico" style="display: block;">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" id='btnfoto' onclick="botonfoto(); return false;">Agregar Foto</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">Finalizar</button>
+                </td>
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+</div>
+</body>
+</html>

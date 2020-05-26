@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ver Solicitudes</title>
+        <link rel="stylesheet" href="estilos_docs.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="ver_medicos.js"></script>
+    </head>
+<body>
+
+    <!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="Inicio.html" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
+      <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Medicos</a>
+      <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Solicitud</a>
+      <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
+    </div>
+  
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
+      <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-padding-large">Agregar Medicos</a>
+      <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-padding-large">Agregar Solicitud</a>
+      <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <h1>Ver Solicitudes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Solicitante</th>
+                <th>Especialidades</th>
+                <th>Comuna</th>
+                <th>Datos contacto</th>
+            </tr>
+        </thead>
+        <!-- Yzma-->
+        <tr class="text-field-l" onclick="mostrarInfo('yzma'); mostrarInfo('yzma2');">
+            <td>Yzma</td>
+            <td>Geriatria</td>
+            <td>Cusco</td>
+            <td>
+                <p>
+                Tel: <mark class="bold">+0</mark> 
+                <br>
+                Mail: <mark class="bold"></mark>
+                <br>
+                Twitter: <mark class="bold"></mark>
+                </p>
+            </td>
+        </tr>
+
+        <tr class="text-field-l">
+                <td colspan="1">
+                    <p  id="yzma" style="display: none;">
+                    Nombre: <mark class="bold">Yzma</mark> 
+                    <br>
+                    Edad: <mark class="bold">1000 anos. </mark> 
+                    <br>
+                    Region: <mark class="bold">Imperio Inca</mark>
+                    <br>
+                    Comuna: <mark class="bold">Cusco</mark>
+                    <br>
+                    Especialidades: <mark class="bold"> Geriatria</mark>
+                    <br>
+                    Tel: <mark class="bold">+0</mark>
+                    <br>
+                    Mail: <mark class="bold"></mark>
+                    <br>
+                    Twitter: <mark class="bold"></mark>
+                    </p>
+                </td>
+
+                <td colspan="3">
+                    <p id="yzma2" style="display: none;">
+                        Informacion Adicional: <mark class="bold"> Serio deterorio 
+                            en el cuerpo debido a la edad</mark>
+                    </p>
+                </td>
+            </tr>  
+            
+            <!-- Homero-->
+        <tr class="text-field-l" onclick="mostrarInfo('homer'); mostrarInfo('homer2');">
+            <td>Homero Simpson</td>
+            <td>Nutricionista</td>
+            <td>Springfield</td>
+            <td>
+                <p>
+                Tel: <mark class="bold">+1  20071 10930</mark> 
+                <br>
+                Mail: <mark class="bold">homer.simpson@gmail.com</mark>
+                <br>
+                Twitter: <mark class="bold">@HomerSimpson</mark>
+                </p>
+            </td>
+        </tr>
+
+        <tr class="text-field-l">
+                <td colspan="1">
+                    <p  id="homer" style="display: none;">
+                    Nombre: <mark class="bold">Homero Simpson</mark> 
+                    <br>
+                    Edad: <mark class="bold">39 anos. </mark> 
+                    <br>
+                    Region: <mark class="bold">Missouri</mark>
+                    <br>
+                    Comuna: <mark class="bold">Springfield</mark>
+                    <br>
+                    Especialidades: <mark class="bold">Nutricionista</mark>
+                    <br>
+                    Tel: <mark class="bold">+1  20071 10930</mark>
+                    <br>
+                    Mail: <mark class="bold">homer.simpson@gmail.com</mark>
+                    <br>
+                    Twitter: <mark class="bold">@HomerSimpson</mark>
+                    </p>
+                </td>
+
+                <td colspan="3">
+                    <p id="homer2" style="display: none;">
+                        Informacion Adicional: <mark class="bold">Obesidad, alcoholismo, otros.</mark>
+                    </p>
+                </td>
+            </tr>
+
+            <!-- John Silver -->
+        <tr class="text-field-l" onclick="mostrarInfo('sil'); mostrarInfo('sil2');">
+            <td>John Silver</td>
+            <td>Mecanico</td>
+            <td>Montressor</td>
+            <td>
+                <p>
+                Tel: <mark class="bold">+56 9988 9089</mark> 
+                <br>
+                Mail: <mark class="bold">j.silver@treasureplanet.com</mark>
+                <br>
+                Twitter: <mark class="bold"></mark>
+                </p>
+            </td>
+        </tr>
+
+        <tr class="text-field-l">
+                <td colspan="1">
+                    <p  id="sil" style="display: none;">
+                    Nombre: <mark class="bold">John Silver</mark> 
+                    <br>
+                    Edad: <mark class="bold">45 anos. </mark> 
+                    <br>
+                    Region: <mark class="bold">Sistema Solar</mark>
+                    <br>
+                    Comuna: <mark class="bold">Montressor</mark>
+                    <br>
+                    Especialidades: <mark class="bold"> Mecanico</mark>
+                    <br>
+                    Tel: <mark class="bold">+56 9988 9089</mark>
+                    <br>
+                    Mail: <mark class="bold">j.silver@treasureplanet.com</mark>
+                    <br>
+                    Twitter: <mark class="bold"></mark>
+                    </p>
+                </td>
+
+                <td colspan="3">
+                    <p id="sil2" style="display: none;">
+                        Informacion Adicional: <mark class="bold">Le entro algo en el ojo bionico.</mark>
+                    </p>
+                </td>
+            </tr>
+
+            <!-- El  principito -->
+        <tr class="text-field-l" onclick="mostrarInfo('prince'); mostrarInfo('prince2');">
+            <td>El Principito</td>
+            <td>Medicina interna</td>
+            <td>Asteroide B 612</td>
+            <td>
+                <p>
+                Tel: <mark class="bold"></mark> 
+                <br>
+                Mail: <mark class="bold">principito@cl.com</mark>
+                <br>
+                Twitter: <mark class="bold"></mark>
+                </p>
+            </td>
+        </tr>
+
+        <tr class="text-field-l">
+                <td colspan="1">
+                    <p  id="prince" style="display: none;">
+                    Nombre: <mark class="bold">El Principito</mark> 
+                    <br>
+                    Edad: <mark class="bold">10 anos. </mark> 
+                    <br>
+                    Region: <mark class="bold">Asteroide B 612</mark>
+                    <br>
+                    Comuna: <mark class="bold">Espacio</mark>
+                    <br>
+                    Especialidades: <mark class="bold"> Medicina Interna</mark>
+                    <br>
+                    Tel: <mark class="bold"></mark>
+                    <br>
+                    Mail: <mark class="bold">principito@cl.com</mark>
+                    <br>
+                    Twitter: <mark class="bold"></mark>
+                    </p>
+                </td>
+
+                <td colspan="3">
+                    <p id="prince2" style="display: none;">
+                        Informacion Adicional: <mark class="bold">Mordedura de serpiente en el talon.</mark>
+                    </p>
+                </td>
+            </tr>
+
+            <!-- Darth Vader-->
+        <tr class="text-field-l" onclick="mostrarInfo('vader'); mostrarInfo('vader2');">
+            <td>Darth Vader</td>
+            <td>Dermatologo</td>
+            <td>Tatooine</td>
+            <td>
+                <p>
+                Tel: <mark class="bold"></mark> 
+                <br>
+                Mail: <mark class="bold"></mark>
+                <br>
+                Twitter: <mark class="bold">@DarthVader</mark>
+                </p>
+            </td>
+        </tr>
+
+        <tr class="text-field-l">
+                <td colspan="1">
+                    <p  id="vader" style="display: none;">
+                    Nombre: <mark class="bold">Darth Vader</mark> 
+                    <br>
+                    Edad: <mark class="bold">42 anos. </mark> 
+                    <br>
+                    Region: <mark class="bold">Imperio</mark>
+                    <br>
+                    Comuna: <mark class="bold">Tatooine</mark>
+                    <br>
+                    Especialidades: <mark class="bold">Dermatologo</mark>
+                    <br>
+                    Tel: <mark class="bold"></mark>
+                    <br>
+                    Mail: <mark class="bold"></mark>
+                    <br>
+                    Twitter: <mark class="bold">@DarthVader</mark>
+                    </p>
+                </td>
+
+                <td colspan="3">
+                    <p id="vader2" style="display: none;">
+                        Informacion Adicional: <mark class="bold">Graves quemaduras causadas por lava. 
+                            No sabe jugar 'el suelo es lava!'.</mark>
+                    </p>
+                </td>
+            </tr>
+    </table>
+</div>
+</div>
+
+</body>
+</html> 
