@@ -9,13 +9,13 @@ if (!file_exists($cd . "/media")){
 }
 
 /**NON file data: */
-$nombreMedico = $_POST["nombre-medico"];
-$regionMedico = $_POST["region-medico"];
-$comunaMedico = $_POST["comuna-medico"];
-$celMedico = $_POST["celular-medico"];
-$mailMedico = $_POST["email-medico"];
-$twitMedico = $_POST["twitter-medico"];
-$expMedico = $_POST["experiencia-medico"];
+$nombreMedico = strip_tags($_POST["nombre-medico"]);
+$regionMedico = strip_tags($_POST["region-medico"]);
+$comunaMedico = strip_tags($_POST["comuna-medico"]);
+$celMedico = strip_tags($_POST["celular-medico"]);
+$mailMedico = strip_tags($_POST["email-medico"]);
+$twitMedico = strip_tags($_POST["twitter-medico"]);
+$expMedico = strip_tags($_POST["experiencia-medico"]);
 
 /**Create array with 'especialidades' */
 $especialidadesMedico = array();
@@ -25,7 +25,13 @@ $_POST["especialidades-medico-3"],$_POST["especialidades-medico-4"],$_POST["espe
 $especialidadesMedico = \array_diff($especialidadesMedico,["sin-especialidad"]);
 
 /**Get files: */
-$target_dir = "media/";
+$nameDir = str_replace(' ', '', $nombreMedico);
+$cd = getcwd();
+if (!file_exists($cd . "/media//". $nameDir)){
+    mkdir($cd . "/media//". $nameDir, "0777");
+}
+//One directory for each doc
+$target_dir =  "media/". $nameDir. "/";
 
 $allowed_image_extension = array("jpg","png","jpeg", "gif");
 
@@ -87,8 +93,8 @@ $db->close();
 
 
 function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp, $msg, $okArray, $fotos, $target_dir){
-    $encontrar_comuna="SELECT id FROM comuna WHERE nombre LIKE '$comuna'";
-    $resultado = $db->query($encontrar_comuna);
+    $find_comuna="SELECT id FROM comuna WHERE nombre LIKE '$comuna'";
+    $resultado = $db->query($find_comuna);
     $id_comuna = mysqli_fetch_array($resultado)["id"];
 
     $sql=$db->prepare("INSERT INTO medico (nombre, experiencia, comuna_id, twitter, email, celular) 
@@ -99,8 +105,8 @@ function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp
     $id_medico = $db->insert_id;
     foreach ($esp as $especialidad){
         if ($especialidad != NULL){
-            $encontrar_especialidad = "SELECT id FROM especialidad WHERE descripcion LIKE '$especialidad'";
-            $resultado = $db->query($encontrar_especialidad);
+            $find_especialidad = "SELECT id FROM especialidad WHERE descripcion LIKE '$especialidad'";
+            $resultado = $db->query($find_especialidad);
             $id_especialidad = mysqli_fetch_array($resultado)["id"];
 
             $sql2=$db->prepare("INSERT INTO especialidad_medico (medico_id,especialidad_id) VALUES ('$id_medico','$id_especialidad')");
