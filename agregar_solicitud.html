@@ -38,7 +38,7 @@
     <div class="w3-content">
         <h1>Agregar Solicitud</h1>
 
-        <form method="post"  onsubmit="return solValidator();" id="form_sol">
+        <form method="post" action="insert_sol.php" enctype="multipart/form-data" onsubmit="return solValidator();" id="form_sol">
             <table>
                 <thead>
                     <tr>
@@ -51,7 +51,7 @@
                         Nombre:
                     </td>
                     <td>
-                        <input  type="text" placeholder="Nombre"  name="nombre-solicitante">
+                        <input  type="text" placeholder="Nombre" id =  "nombre-solicitante" name="nombre-solicitante">
                     </td>
                 </tr>
                 <tr>
@@ -69,32 +69,32 @@
                 <tr>
                     <td>Archivos Adicionales (Opcional):</td>
                     <td>
-                        <input id="arc1" type="file" name="foto-solicitante" style="display: block;">
+                        <input id="arc1" type="file" name="archivos-solicitante" style="display: block;">
                     </td>
                 </tr>
                 <tr id="arc2" style="display: none;">
                     <td></td>
                     <td>
-                        <input  type="file" name="archivos-solicitante" style="display: block;">
+                        <input  type="file" name="archivos-solicitante-2" style="display: block;">
                     </td>
                 </tr>
                 <tr id="arc3" style="display: none;">
                     <td></td>
                     <td>
-                        <input  type="file" name="archivos-solicitante" style="display: block;">
+                        <input  type="file" name="archivos-solicitante-3" style="display: block;">
                     </td>
                     
                 </tr>
                 <tr id="arc4" style="display: none;">
                     <td></td>
                     <td>
-                        <input  type="file" name="archivos-solicitante" style="display: block;">
+                        <input  type="file" name="archivos-solicitante-4" style="display: block;">
                     </td>
                 </tr>
                 <tr id="arc5" style="display: none;">
                     <td></td>
                     <td>
-                        <input  type="file" name="archivos-solicitante" style="display: block;">
+                        <input  type="file" name="archivos-solicitante-5" style="display: block;">
                     </td>
                 </tr>
                 <tr>
@@ -146,7 +146,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button type="submit">Finalizar</button>
+                        <button type="submit" name = "submitSol">Finalizar</button>
                     </td>
     
                 </tr>

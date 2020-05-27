@@ -1,0 +1,50 @@
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title>
+        Agregar Medico
+    </title>
+    <body>
+
+    <header>
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+        <a href="Inicio.html" class="w3-bar-item w3-button"><b>CoVid-19</b> Visitas Medicas</a>
+        <!-- Float links to the right. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                <a href="Agregar_Medico.html" class="w3-bar-item w3-button">Agregar Datos de Médico</a>
+                <a href="Ver_Medicos.html" class="w3-bar-item w3-button">Ver Médicos</a>
+                <a href="Publicar_Solicitud.html" class="w3-bar-item w3-button">Publicar Solicitud de Atención</a>
+                <a href="Ver_solicitud.html" class="w3-bar-item w3-button">Ver Solicitud de Atención</a>
+            </div>
+        </div>
+    </div>
+
+        <div class="w3-display-top w3-margin-top w3-left">
+            <h1> <br> </h1>
+            <h1 class="w3-xxlarge w3-text-white"></span> <span class="w3-hide-small w3-text-grey">Agregar </span><span class="w3-padding w3-black w3-opacity-min">Medicos</h1>
+        </div>
+    </header>
+
+    <div class="w3-container w3-padding-32" id="contact">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
+            <p>Rellene todos los campos para agregar un médico.</p>
+                <form action="/action_page.php" target="_blank">
+                    <input class="w3-input w3-border" type="text" placeholder="Nombre" required name="Name">
+                    <input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="Email">
+                    <input class="w3-input w3-section w3-border" type="text" placeholder="Subject" required name="Subject">
+                    <input class="w3-input w3-section w3-border" type="text" placeholder="Comment" required name="Comment">
+              <button class="w3-button w3-black w3-section" type="submit" onclick="location.href = 'Inicio.html' ">
+            <i class="fa fa-paper-plane"></i> Agregar Medico
+        </button>
+        </form>
+        <select id="regiones"></select>
+        <select id="comunas"></select>  
+    </div>
+    </body>
+
+<script src="regionycomuna.js"></script>   
+</html>
