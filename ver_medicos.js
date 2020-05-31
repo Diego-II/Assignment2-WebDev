@@ -24,11 +24,11 @@ function showDivs(n,name) {
         slideIndex = fotos.length;
     }
     for (i = 0; i < fotos.length; i++) {
-    fotos[i].style.display = "none";
+    fotos[i].style.display = 'none';
     }
-    
+
     try{
-        fotos[slideIndex-1].style.display = "block";
+        fotos[slideIndex-1].style.display = 'block';
     } catch(TypeError){}
 }
 
@@ -36,11 +36,21 @@ function showDivs(n,name) {
 function mostrarInfo(id){
     var x = document.getElementById(id);
 
-    if (x.style.display == "none") {
-        x.style.display = "block";
+    if (x.style.display == 'none') {
+        x.style.display = 'block';
     } 
         else {
-        x.style.display = "none";
+        x.style.display = 'none';
     }
-    
 }
+
+function mostrarDosInfo(id1,id2){
+    mostrarInfo(id1);
+    mostrarInfo(id2);
+}
+
+function onClickAction(slides,info1,info2){
+    mostrarDosInfo(info1,info2);
+    plusDivs(0,slides);
+}
+

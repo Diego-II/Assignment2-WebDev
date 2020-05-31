@@ -70,58 +70,51 @@ $db->close();
         </thead>
         <?php
         //Iterete over doctors:
-        foreach($doc_array as $k => $doc){ 
-        echo '<tr class="text-field-l" onclick="mostrarInfo("info1"); mostrarInfo("info2"); plusDivs(0,"mySlides")">';
-            echo '<td>'. $doc["nombre-medico"].'</td>';
-            echo '<td>';
-                //echo implode(', <br>',$doc["especialidad-medico"]); 
-        
-                foreach(array_values($doc["especialidad-medico"]) as $k => $v){
-                    echo $v. '<br> ';
-                    }
-            echo '</td>';
-            echo '<td>'.$doc["comuna-medico"].'</td>';
-            echo '<td>';
-                echo '<p>';
-                echo 'Tel: <mark class="bold">'.$doc["celular-medico"].'</mark>';
-                echo '<br>';
-                echo 'Mail: <mark class="bold">'.$doc["email-medico"].'</mark>';
-                echo '<br>';
-                echo 'Twitter: <mark class="bold">'.$doc["twitter-medico"].'</mark>';
-                echo '</p>';
-            echo '</td>';
-        echo '</tr>';
-        echo '<tr class="text-field-l">';
-                echo '<td >';
-                    echo '<div class="w3-content w3-display-container"  id="info1" style="display: none;">';
-                    $foto_alt = $doc["nombre-medico"];
-                    foreach($doc["dir-fotos"] as $key => $value){
-                        $foto_dir = $value.$doc["fotos-medico"][$key];
-                        echo '<img class="mySlides" alt="'.$foto_alt.'" src="'.$foto_dir.'" style="display: none; width:320px; height:240px;">';
-                    };
-                    echo '<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1,"mySlides")">&#10094;</button>';
-                    echo '<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1,"mySlides")">&#10095;</button>';
-                    echo '</div>';
-                echo '</td>';
-                echo '<td colspan="3">';
-                echo '<p  id="info2" style="display: none;">';
-                    echo 'Nombre: <mark class="bold">'.$doc["nombre-medico"].'</mark> ';
-                    echo '<br>';
-                    echo 'Region: <mark class="bold">'.$doc["region-medico"].'</mark>';
-                    echo '<br>';
-                    echo 'Comuna: <mark class="bold">'.$doc["comuna-medico"].'</mark>';
-                    echo '<br>';
-                    echo 'Especialidades: <mark class="bold"> Cardiologo, Pediatra.</mark>';
-                    echo '<br>';
-                    echo 'Tel: <mark class="bold">'.$doc["celular-medico"].'</mark>';
-                    echo '<br>';
-                    echo 'Mail: <mark class="bold">'.$doc["email-medico"].'</mark>';
-                    echo '<br>';
-                    echo 'Twitter: <mark class="bold">'.$doc["twitter-medico"].'</mark>';
-                echo '</p>';
-            echo '</td>';
-        echo '</tr>';
-        };
+        foreach($doc_array as $k => $doc){
+        echo "
+        <tr class='text-field-l'  onclick=onClickAction('mySlides".$k."','info1".$k."','info2".$k."')>        
+        <td>".$doc["nombre-medico"]."</td>
+            <td>"
+                .implode(', ',$doc["especialidad-medico"])."
+            </td>
+            <td>".$doc["comuna-medico"]."</td>
+            <td>
+                <p>
+                Tel: <mark class='bold'>".$doc["celular-medico"]."</mark>
+                <br>
+                Mail: <mark class='bold'>".$doc["email-medico"]."</mark>
+                <br>
+                Twitter: <mark class='bold'>".$doc["twitter-medico"]."</mark>
+                </p>
+        </td>
+        </tr>
+        <tr class='text-field-l'>
+                <td >
+                    <div class='w3-content w3-display-container'  id='info1".$k."' style='display: none;'>"
+                    .getFotosSlides($k, $doc["nombre-medico"], $doc["dir-fotos"], $doc["fotos-medico"]).
+                    "<button class='w3-button w3-black w3-display-left' onclick=plusDivs(-1,'mySlides".$k."')>&#10094;</button>
+                    <button class='w3-button w3-black w3-display-right' onclick=plusDivs(1,'mySlides".$k."')>&#10095;</button>
+                    </div>
+                </td>
+                <td colspan='3'>
+                <p  id='info2".$k."' style='display: none;'>
+                    Nombre: <mark class='bold'>".$doc["nombre-medico"]."</mark> 
+                    <br>
+                    Region: <mark class='bold'>".$doc["region-medico"]."</mark>
+                    <br>
+                    Comuna: <mark class='bold'>".$doc["comuna-medico"]."</mark>
+                    <br>
+                    Especialidades: <mark class='bold'>".implode(', ',$doc["especialidad-medico"])."</mark>
+                    <br>
+                    Tel: <mark class='bold'>".$doc["celular-medico"]."</mark>
+                    <br>
+                    Mail: <mark class='bold'>".$doc["email-medico"]."</mark>
+                    <br>
+                    Twitter: <mark class='bold'>".$doc["twitter-medico"]."</mark>
+                </p>
+            </td>
+        </tr>";
+        }
         ?>   
     </table>
 </div>

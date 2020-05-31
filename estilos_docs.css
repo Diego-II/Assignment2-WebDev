@@ -52,7 +52,7 @@ tr:hover {background-color: #f5f5f5;}
 
 
 
-.mySlides:hover, .mySlides2:hover, .mySlides3:hover, .mySlides4:hover, .mySlides5:hover {
+.mySlides0:hover, .mySlides1:hover, .mySlides2:hover, .mySlides3:hover, .mySlides4:hover {
   -ms-transform: scale(2.5); /* IE 9 */
   -webkit-transform: scale(2.5); /* Safari 3-8 */
   transform: scale(2.5) translate(50%, 0);
