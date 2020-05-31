@@ -102,7 +102,7 @@ function getFotosSlides($k, $alt, $path, $fotos_dir){
     $count = count($fotos_dir);
     $res = array();
     for($i = 0; $i < $count; $i++){
-        $res[] = "<img class='mySlides".$k."' alt='".$alt."' src='".$path[$i].$fotos_dir[$i]."' style='display: none; height:240px;'>";
+        $res[] = "<img class='mySlides".$k."' alt='".$alt."' src='".$path[$i].$fotos_dir[$i]."' style='display: none; height:240px; text-align: center;'>";
     }
     return implode('',$res);
 }

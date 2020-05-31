@@ -1,6 +1,5 @@
 <?php
 require_once('db_config.php');
-//require_once('insert_doc.php');
 require_once('ver_docs_aux.php');
 
 $db = DbConfig::getConnection();
@@ -39,7 +38,7 @@ $db->close();
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="Inicio.html" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
+      <a href="ver_medicos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Solicitud</a>
       <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
@@ -47,7 +46,7 @@ $db->close();
   
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-      <a href="ver_medicos.html" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
+      <a href="ver_medicos.php" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-padding-large">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-padding-large">Agregar Solicitud</a>
       <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
@@ -90,7 +89,7 @@ $db->close();
         </tr>
         <tr class='text-field-l'>
                 <td >
-                    <div class='w3-content w3-display-container'  id='info1".$k."' style='display: none;'>"
+                    <div class='w3-content w3-display-container'  id='info1".$k."' style='display: none; text-align: center;'>"
                     .getFotosSlides($k, $doc["nombre-medico"], $doc["dir-fotos"], $doc["fotos-medico"]).
                     "<button class='w3-button w3-black w3-display-left' onclick=plusDivs(-1,'mySlides".$k."')>&#10094;</button>
                     <button class='w3-button w3-black w3-display-right' onclick=plusDivs(1,'mySlides".$k."')>&#10095;</button>
