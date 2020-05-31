@@ -11,21 +11,25 @@ function plusDivs(n,name) {
   showDivs(slideIndex += n,name);
 }
 
+
+
 function showDivs(n,name) {
     var i;
-    var x = document.getElementsByClassName(name);
+    const fotos = document.getElementsByClassName(name);    
 
-    if (n > x.length) {
-        slideIndex = 1
+    if (n > fotos.length) {
+        slideIndex = 1;
     }
     if (n < 1) {
-        slideIndex = x.length
+        slideIndex = fotos.length;
     }
-    for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
+    for (i = 0; i < fotos.length; i++) {
+    fotos[i].style.display = "none";
     }
-
-    x[slideIndex-1].style.display = "block";  
+    
+    try{
+        fotos[slideIndex-1].style.display = "block";
+    } catch(TypeError){}
 }
 
 
