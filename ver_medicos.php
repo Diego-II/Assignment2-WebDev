@@ -11,10 +11,6 @@ $ultimo_id = mysqli_fetch_array($resultado)["MAX(id)"];
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
 $start_from = 1 + ($page-1) * 5;
 
-/**
- * Get n docs with 5 tops:
- */
-
 //Cantidad de paginas:
 
 $n_pages = ceil($ultimo_id/5);
@@ -54,10 +50,10 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="Inicio.html" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-      <a href="ver_medicos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
+      <a href="ver_medicos.php?page=1" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Solicitud</a>
-      <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
+      <a href="ver_solicitudes.php?page=1" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
     </div>
   
     <!-- Navbar on small screens -->
@@ -65,7 +61,7 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
       <a href="ver_medicos.php" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-padding-large">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-padding-large">Agregar Solicitud</a>
-      <a href="ver_solicitudes.html" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
+      <a href="ver_solicitudes.php?page=1" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
     </div>
   </div>
   <!---<?php require_once("ver_medicos.php");?> -->
@@ -140,7 +136,7 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
         <td>
             <a href = <?php echo getPrevPage()?> > <<< </a> 
         </td>
-        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"];?> </td> <td> </td> <td> </td> <td> </td> 
+        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td> <td> </td> <td> </td> <td> </td> 
         <td>
             <a href = <?php echo getNextPage($n_pages)?> > >>> </a> 
         </td>

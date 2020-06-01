@@ -9,15 +9,63 @@ if (!file_exists($cd . "/files_solicitudes")){
 }
 
 
-/**NON file data: */
-$nombreSol = strip_tags($_POST["nombre-solicitante"]);
-$regionSol = strip_tags($_POST["region-solicitante"]);
-$comunaSol = strip_tags($_POST["comuna-solicitante"]);
-$celSol = strip_tags($_POST["celular-solicitante"]);
-$mailSol = strip_tags($_POST["email-solicitante"]);
-$twitSol = strip_tags($_POST["twitter-solicitante"]);
-$sinSol = strip_tags($_POST["sintomas-solicitante"]);
-$espSol = strip_tags($_POST["especialidad-solicitante"]);
+/**NON file data: 
+ * Get and Validate:
+*/
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["nombre-solicitante"])) {
+        $nameErr = "Name requerido";
+    } else {
+        $nombreSol = test_input($_POST["nombre-solicitante"]);
+        if (!preg_match("/^[a-zA-Z. ]*$/",$nombreSol)) {
+            $nameErr = "Only letters, white space and points allowed";
+          }
+    }
+    if (empty($_POST["region-solicitante"])) {
+        $regionErr = "Region requerido";
+    } else {
+        $regionSol = test_input($_POST["region-solicitante"]);
+    }
+    if (empty($_POST["comuna-solicitante"])) {
+        $comunaErr = "Comuna requerido";
+    } else {
+        $comunaSol = test_input($_POST["comuna-solicitante"]);
+    }
+    if (empty($_POST["especialidad-solicitante"])) {
+        $espErr = "Especialidad requerido";
+    } else {
+        $espSol = test_input($_POST["especialidad-solicitante"]);
+    }
+    if (empty($_POST["celular-solicitante"])) {
+        $celularErr = "Celular requerido";
+    } else {
+        $celSol = test_input($_POST["celular-solicitante"]);
+        $numlength = strlen((string)$celSol);
+        if($numlength !== 9){
+            $celularErr = "Celular con incorrecta cantidad de digitos.";
+        }
+    }
+    if (empty($_POST["email-solicitante"])) {
+        $emailErr = "Email requerido";
+    } else {
+        $mailSol = test_input($_POST["email-solicitante"]);
+        if (!filter_var($mailSol, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+          }
+    }
+    //optional
+    $twitSol = test_input($_POST["twitter-solicitante"]);
+    $sinSol = test_input($_POST["sintomas-solicitante"]);
+}
+
+//$nombreSol = test_input($_POST["nombre-solicitante"]);
+//$regionSol = test_input($_POST["region-solicitante"]);
+//$comunaSol = test_input($_POST["comuna-solicitante"]);
+//$celSol = test_input($_POST["celular-solicitante"]);
+//$mailSol = test_input($_POST["email-solicitante"]);
+//$twitSol = test_input($_POST["twitter-solicitante"]);
+//$sinSol = test_input($_POST["sintomas-solicitante"]);
+//$espSol = test_input($_POST["especialidad-solicitante"]);
 
 /**Upload adicional files: */
 /**Create dir for files: */
@@ -123,4 +171,11 @@ function insertSol($db, $nombreSol, $comunaSol, $celSol, $mailSol, $twitSol, $si
 
     echo "<td><button onclick = \"location.href = 'Inicio.html';\">Volver a pagina inicial</button></td>";
 }
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 
+?>

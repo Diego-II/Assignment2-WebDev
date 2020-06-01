@@ -6,13 +6,34 @@ $db = DbConfig::getConnection();
 
 
 //$sol = getOneSol($db, 5);
-echo '<br><hr> <h2>Errores</h2>';
-$sol_array = getNSol($db,1,2);
 
+
+$sql="SELECT MAX(id) FROM solicitud_atencion";
+$resultado=$db->query($sql);
+$ultimo_id = mysqli_fetch_array($resultado)["MAX(id)"];
+
+if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+$start_from = 1 + ($page-1) * 5;
+
+
+$n_pages = ceil($ultimo_id/5);
+
+function getSols($db, $inicio_id, $ultimo_id){
+    if($inicio_id + 4 <= $ultimo_id){
+        $sol_array = getNSol($db, $inicio_id, $inicio_id + 4);
+    } else{
+        $sol_array = getNsol($db, $inicio_id, $ultimo_id);
+    }
+    return $sol_array;
+}
+$sol_array = getSols($db, $start_from, $ultimo_id);
 $db -> close();
 
-
-echo '<br><hr>'
+for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
+    echo "<a href='index.php?page=".$i."'";
+    if ($i==$page)  echo " class='curPage'";
+    echo ">".$i."</a> "; 
+}; 
 ?>
 
 <!DOCTYPE html>
@@ -32,18 +53,18 @@ echo '<br><hr>'
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="Inicio.html" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-      <a href="ver_medicos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
+      <a href="ver_medicos.php?page=1" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Agregar Solicitud</a>
-      <a href="ver_solicitudes.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
+      <a href="ver_solicitudes.php?page=1" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Ver Solicitudes</a>
     </div>
   
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-      <a href="ver_medicos.php" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
+      <a href="ver_medicos.php?page=1" class="w3-bar-item w3-button w3-padding-large">Ver Medicos</a>
       <a href="agregar_medicos.html" class="w3-bar-item w3-button w3-padding-large">Agregar Medicos</a>
       <a href="agregar_solicitud.html" class="w3-bar-item w3-button w3-padding-large">Agregar Solicitud</a>
-      <a href="ver_solicitudes.php" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
+      <a href="ver_solicitudes.php?page=1" class="w3-bar-item w3-button w3-padding-large">Ver Solicitudes</a>
     </div>
   </div>
   <div class="w3-row-padding w3-padding-64 w3-container">
@@ -111,5 +132,18 @@ echo '<br><hr>'
 
         ";}
         ?>
+        </table>
+
+<table>
+    <tr>
+        <td>
+            <a href = <?php echo getPrevPage()?> > <<< </a> 
+        </td>
+        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td> <td> </td> <td> </td> <td> </td> 
+        <td>
+            <a href = <?php echo getNextPage($n_pages)?> > >>> </a> 
+        </td>
+    <tr>
+  </table>
 </body>
 </html>

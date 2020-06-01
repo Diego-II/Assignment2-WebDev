@@ -67,10 +67,10 @@ function getOneSol($db, $sol_id){
 }
 
 function getNSol($db, $id_inicial, $n_sol){
-    $id_final = $id_inicial + $n_sol;
+    $id_final = $id_inicial + $n_sol - 1;
     $sol_array = array();
     if($n_sol > 1){
-        for($sol_id = $id_inicial; $sol_id <= $id_final-1; $sol_id++){
+        for($sol_id = $id_inicial; $sol_id <= $id_final; $sol_id++){
             if(getOneSol($db, $sol_id) !== false){
                 array_push($sol_array, getOneSol($db, $sol_id)); 
             } else{
@@ -96,4 +96,22 @@ function getFilesNames($files_path, $files_name, $files_mime){
     }
 }
 
+function getPrevPage(){
+    if($_GET["page"] - 1 <= 1){
+        
+        return "ver_solicitudes.php?page=1";
+    }else{
+        $prev = $_GET["page"]-1;
+        return "ver_solicitudes.php?page=".$prev."";
+    }
+}
+
+function getNextPage($n_pages){
+    if($_GET["page"] + 1 >= $n_pages){
+        return "ver_solicitudes.php?page=".$n_pages."";
+    }else{
+        $next = $_GET["page"] + 1;
+        return "ver_solicitudes.php?page=".$next."";
+    }
+}
 ?>

@@ -8,14 +8,51 @@ if (!file_exists($cd . "/media")){
     mkdir($cd . "/media", "0777");
 }
 
-/**NON file data: */
-$nombreMedico = strip_tags($_POST["nombre-medico"]);
-$regionMedico = strip_tags($_POST["region-medico"]);
-$comunaMedico = strip_tags($_POST["comuna-medico"]);
-$celMedico = strip_tags($_POST["celular-medico"]);
-$mailMedico = strip_tags($_POST["email-medico"]);
-$twitMedico = strip_tags($_POST["twitter-medico"]);
-$expMedico = strip_tags($_POST["experiencia-medico"]);
+/**NON file data: 
+ * Get and validate:
+*/
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["nombre-medico"])) {
+        $nameErr = "Name requerido";
+    } else {
+        $nombreMedico = test_input($_POST["nombre-medico"]);
+        if (!preg_match("/^[a-zA-Z. ]*$/",$nombreMedico)) {
+            $nameErr = "Only letters, white space and points allowed";
+          }
+    }
+    if (empty($_POST["region-medico"])) {
+        $regionErr = "Region requerido";
+    } else {
+        $regionMedico = test_input($_POST["region-medico"]);
+    }
+    if (empty($_POST["comuna-medico"])) {
+        $comunaErr = "Comuna requerido";
+    } else {
+        $comunaMedico = test_input($_POST["comuna-medico"]);
+    }
+    if (empty($_POST["celular-medico"])) {
+        $celularErr = "Celular requerido";
+    } else {
+        $celMedico = test_input($_POST["celular-medico"]);
+        $numlength = strlen((string)$celMedico);
+        if($numlength !== 9){
+            $celularErr = "Celular con incorrecta cantidad de digitos.";
+        }
+    }
+    if (empty($_POST["email-medico"])) {
+        $emailErr = "Email requerido";
+    } else {
+        $mailMedico = test_input($_POST["email-medico"]);
+        if (!filter_var($mailMedico, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+          }
+    }
+    //optional
+    $twitMedico = test_input($_POST["twitter-medico"]);
+    $expMedico = test_input($_POST["experiencia-medico"]);
+}
+
 
 /**Create array with 'especialidades' */
 $especialidadesMedico = array();
@@ -159,4 +196,11 @@ function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp
     }
     echo "<td><button onclick = \"location.href = 'Inicio.html';\">Volver a pagina inicial</button></td>";
 }
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 ?>
