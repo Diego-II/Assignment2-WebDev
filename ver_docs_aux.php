@@ -82,7 +82,7 @@ function getOneDoc($db, $doc_id){
 }
 
 function getNDocs($db, $id_inicial, $n_docs){
-    $id_final = $id_inicial + $n_docs;
+    $id_final = $id_inicial + $n_docs -1;
     $doc_array = array();
     if($n_docs > 1){
         for($doc_id = $id_inicial; $doc_id <= $id_final; $doc_id++){
@@ -105,6 +105,25 @@ function getFotosSlides($k, $alt, $path, $fotos_dir){
         $res[] = "<img class='mySlides".$k."' alt='".$alt."' src='".$path[$i].$fotos_dir[$i]."' style='display: none; height:240px; text-align: center;'>";
     }
     return implode('',$res);
+}
+
+function getPrevPage(){
+    if($_GET["page"] - 1 <= 1){
+        
+        return "ver_medicos.php?page=1";
+    }else{
+        $prev = $_GET["page"]-1;
+        return "ver_medicos.php?page=".$prev."";
+    }
+}
+
+function getNextPage($n_pages){
+    if($_GET["page"] + 1 >= $n_pages){
+        return "ver_medicos.php?page=".$n_pages."";
+    }else{
+        $next = $_GET["page"] + 1;
+        return "ver_medicos.php?page=".$next."";
+    }
 }
 
 ?>

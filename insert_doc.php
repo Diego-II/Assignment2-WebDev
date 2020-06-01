@@ -82,14 +82,12 @@ foreach($_FILES as $file){
     }
 }
 
-$db = DbConfig::getConnection();
 if(isset($_POST["submitDoc"])){
-
+    $db = DbConfig::getConnection();
     insertDoc($db, $nombreMedico, $regionMedico, $comunaMedico, $celMedico, 
     $mailMedico, $twitMedico, $expMedico, $especialidadesMedico, $msg, $uploadOkArray, $fotos, $target_dir);
-
+    $db->close();
 }
-$db->close();
 
 
 function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp, $msg, $okArray, $fotos, $target_dir){
@@ -98,9 +96,25 @@ function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp
     $id_comuna = mysqli_fetch_array($resultado)["id"];
 
     $sql=$db->prepare("INSERT INTO medico (nombre, experiencia, comuna_id, twitter, email, celular) 
-    VALUES ('$nombre', '$exp', '$id_comuna', '$twit', '$mail', '$cel') ");
+    VALUES  (?,?,?,?,?,?)");
+    if ( false===$sql ) {
+        //check prepare
+        die('prepare() failed: ' . htmlspecialchars($sql->error));
+      }
+    //To bind: ('$nombre', '$exp', '$id_comuna', '$twit', '$mail', '$cel')
+    $rc = $sql->bind_param('ssissi',$nombre, $exp, $id_comuna, $twit, $mail, $cel);
     
-    $sql->execute();
+    if ( false===$rc ) {
+        //bind param check
+        die('bind_param() failed: ' . htmlspecialchars($sql->error));
+    }
+
+    $rc = $sql->execute();
+    if ( false===$rc ) {
+        //Insert check
+        die('execute() failed: ' . htmlspecialchars($sql->error));
+    }
+    $sql->close();
 
     $id_medico = $db->insert_id;
     foreach ($esp as $especialidad){
@@ -109,8 +123,23 @@ function insertDoc($db, $nombre,$region, $comuna, $cel, $mail, $twit, $exp, $esp
             $resultado = $db->query($find_especialidad);
             $id_especialidad = mysqli_fetch_array($resultado)["id"];
 
-            $sql2=$db->prepare("INSERT INTO especialidad_medico (medico_id,especialidad_id) VALUES ('$id_medico','$id_especialidad')");
-            $sql2->execute();
+            $sql2=$db->prepare("INSERT INTO especialidad_medico (medico_id,especialidad_id) VALUES (?,?)");
+            if ( false===$sql2 ) {
+                //check prepare
+                die('prepare() failed: ' . htmlspecialchars($sql2->error));
+            }
+            $rc2 = $sql2->bind_param('ii',$id_medico,$id_especialidad);
+            if ( false===$rc2 ) {
+                //bind param check
+                die('bind_param() failed: ' . htmlspecialchars($sql->error));
+            }
+            //('$id_medico','$id_especialidad')
+            $rc2 = $sql2->execute();
+            if ( false===$rc2 ) {
+                //Insert check
+                die('execute() failed: ' . htmlspecialchars($sql2->error));
+            }
+            $sql2->close();
         }
     }
 

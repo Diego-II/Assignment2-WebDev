@@ -70,7 +70,7 @@ function getNSol($db, $id_inicial, $n_sol){
     $id_final = $id_inicial + $n_sol;
     $sol_array = array();
     if($n_sol > 1){
-        for($sol_id = $id_inicial; $sol_id <= $id_final; $sol_id++){
+        for($sol_id = $id_inicial; $sol_id <= $id_final-1; $sol_id++){
             if(getOneSol($db, $sol_id) !== false){
                 array_push($sol_array, getOneSol($db, $sol_id)); 
             } else{

@@ -4,21 +4,37 @@ require_once('ver_docs_aux.php');
 
 $db = DbConfig::getConnection();
 
-//$sql="SELECT MAX(id) FROM medico";
-//$resultado=$db->query($sql);
-//$ultimo_id = mysqli_fetch_array($resultado)["MAX(id)"];
+$sql="SELECT MAX(id) FROM medico";
+$resultado=$db->query($sql);
+$ultimo_id = mysqli_fetch_array($resultado)["MAX(id)"];
 
-//$doc = getOneDoc($db, $ultimo_id);
+if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+$start_from = 1 + ($page-1) * 5;
 
 /**
  * Get n docs with 5 tops:
  */
-//$ultimo_id = mysqli_fetch_array($resultado)["MAX(id)"];
-//Cantidad de paginas:
-//$n_pages = ceil($ultimo_id/5);
 
-$doc_array = getNDocs($db, 1, 3);
-$db->close();
+//Cantidad de paginas:
+
+$n_pages = ceil($ultimo_id/5);
+
+function getDocs($db, $inicio_id, $ultimo_id){
+    if($inicio_id + 4 <= $ultimo_id){
+        $doc_array = getNDocs($db, $inicio_id, $inicio_id + 4);
+    } else{
+        $doc_array = getNDocs($db, $inicio_id, $ultimo_id);
+    }
+    return $doc_array;
+}
+$doc_array = getDocs($db, $start_from,$ultimo_id);
+$db -> close();
+
+for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
+    echo "<a href='index.php?page=".$i."'";
+    if ($i==$page)  echo " class='curPage'";
+    echo ">".$i."</a> "; 
+}; 
 ?>
 
 <!DOCTYPE html>
@@ -110,12 +126,26 @@ $db->close();
                     Mail: <mark class='bold'>".$doc["email-medico"]."</mark>
                     <br>
                     Twitter: <mark class='bold'>".$doc["twitter-medico"]."</mark>
+                    <br>
+                    Experiencia: <mark class='bold'>".$doc["experiencia-medico"]."</mark>
                 </p>
             </td>
         </tr>";
         }
         ?>   
     </table>
+
+<table>
+    <tr>
+        <td>
+            <a href = <?php echo getPrevPage()?> > <<< </a> 
+        </td>
+        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"];?> </td> <td> </td> <td> </td> <td> </td> 
+        <td>
+            <a href = <?php echo getNextPage($n_pages)?> > >>> </a> 
+        </td>
+    <tr>
+  </table>
 </div>
 </div>
 
