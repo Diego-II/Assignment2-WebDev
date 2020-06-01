@@ -71,7 +71,7 @@ $db->close();
         //Iterete over doctors:
         foreach($doc_array as $k => $doc){
         echo "
-        <tr class='text-field-l'  onclick=onClickAction('mySlides".$k."','info1".$k."','info2".$k."')>        
+        <tr class='text-field-l'  onclick=onClickActionDoc('mySlides".$k."','info1".$k."','info2".$k."')>        
         <td>".$doc["nombre-medico"]."</td>
             <td>"
                 .implode(', ',$doc["especialidad-medico"])."

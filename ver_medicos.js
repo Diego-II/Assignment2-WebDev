@@ -49,7 +49,7 @@ function mostrarDosInfo(id1,id2){
     mostrarInfo(id2);
 }
 
-function onClickAction(slides,info1,info2){
+function onClickActionDoc(slides,info1,info2){
     mostrarDosInfo(info1,info2);
     plusDivs(0,slides);
 }
