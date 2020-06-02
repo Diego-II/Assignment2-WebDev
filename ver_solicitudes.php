@@ -29,11 +29,7 @@ function getSols($db, $inicio_id, $ultimo_id){
 $sol_array = getSols($db, $start_from, $ultimo_id);
 $db -> close();
 
-for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
-    echo "<a href='index.php?page=".$i."'";
-    if ($i==$page)  echo " class='curPage'";
-    echo ">".$i."</a> "; 
-}; 
+
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +44,13 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
     </head>
 <body>
 
+<?php
+for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
+    echo "<a href='index.php?page=".$i."'";
+    if ($i==$page)  echo " class='curPage'";
+    echo ">".$i."</a> "; 
+}; 
+?>
     <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
@@ -84,7 +87,7 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
         foreach($sol_array as $k => $sol){
         echo "
         <!--- non hidden rows -->
-        <tr class='text-field-l' onclick=mostrarDosInfo('info0".$k."','info1".$k."');>
+        <tr class='text-field-l' onclick=mostrarDosInfo(\"info0".$k."\",\"info1".$k."\");>
         <td>".$sol["nombre-solicitante"]."</td>
         <td>".$sol["especialidad-solicitante"]."</td>
         <td>".$sol["comuna-solicitante"]."</td>
@@ -137,13 +140,15 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
 <table>
     <tr>
         <td>
-            <a href = <?php echo getPrevPage()?> > <<< </a> 
+            <a href = <?php echo getPrevPage()?>  style="text-align:left"> &lt;&lt;&lt; </a> 
         </td>
-        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td> <td> </td> <td> </td> <td> </td> 
+        <td  style="text-align:center"> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td> 
         <td>
-            <a href = <?php echo getNextPage($n_pages)?> > >>> </a> 
+            <a href = <?php echo getNextPage($n_pages)?>  style="text-align:right"> >>> </a> 
         </td>
     <tr>
   </table>
+  </div>
+  </div>
 </body>
 </html>

@@ -5,7 +5,8 @@ require_once('db_config.php');
 /** Create 'media' directory: */
 $cd = getcwd();
 if (!file_exists($cd . "/media")){
-    mkdir($cd . "/media", "0777");
+    mkdir($cd . "/media", "0777",true);
+    chmod($cd . "/media", 0777);
 }
 
 /**NON file data: 
@@ -65,7 +66,8 @@ $especialidadesMedico = \array_diff($especialidadesMedico,["sin-especialidad"]);
 $nameDir = str_replace(' ', '', $nombreMedico);
 $cd = getcwd();
 if (!file_exists($cd . "/media//". $nameDir)){
-    mkdir($cd . "/media//". $nameDir, "0777");
+    mkdir($cd . "/media//". $nameDir, "0777",true);
+    chmod($cd . "/media//". $nameDir, 0777);
 }
 //One directory for each doc
 $target_dir =  "media/". $nameDir. "/";

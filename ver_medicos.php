@@ -26,11 +26,6 @@ function getDocs($db, $inicio_id, $ultimo_id){
 $doc_array = getDocs($db, $start_from,$ultimo_id);
 $db -> close();
 
-for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
-    echo "<a href='index.php?page=".$i."'";
-    if ($i==$page)  echo " class='curPage'";
-    echo ">".$i."</a> "; 
-}; 
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +39,13 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
         <script src="ver_medicos.js"></script>
     </head>
 <body>
-
+<?php
+for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
+    echo "<a href='index.php?page=".$i."'";
+    if ($i==$page)  echo " class='curPage'";
+    echo ">".$i."</a> "; 
+}; 
+?>
     <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
@@ -83,7 +84,7 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
         //Iterete over doctors:
         foreach($doc_array as $k => $doc){
         echo "
-        <tr class='text-field-l'  onclick=onClickActionDoc('mySlides".$k."','info1".$k."','info2".$k."')>        
+        <tr class='text-field-l'  onclick=onClickActionDoc(\"mySlides".$k."\",\"info1".$k."\",\"info2".$k."\")>        
         <td>".$doc["nombre-medico"]."</td>
             <td>"
                 .implode(', ',$doc["especialidad-medico"])."
@@ -103,8 +104,8 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
                 <td >
                     <div class='w3-content w3-display-container'  id='info1".$k."' style='display: none; text-align: center;'>"
                     .getFotosSlides($k, $doc["nombre-medico"], $doc["dir-fotos"], $doc["fotos-medico"]).
-                    "<button class='w3-button w3-black w3-display-left' onclick=plusDivs(-1,'mySlides".$k."')>&#10094;</button>
-                    <button class='w3-button w3-black w3-display-right' onclick=plusDivs(1,'mySlides".$k."')>&#10095;</button>
+                    "<button class='w3-button w3-black w3-display-left' onclick=plusDivs(-1,\"mySlides".$k."\")>&#10094;</button>
+                    <button class='w3-button w3-black w3-display-right' onclick=plusDivs(1,\"mySlides".$k."\")>&#10095;</button>
                     </div>
                 </td>
                 <td colspan='3'>
@@ -134,11 +135,11 @@ for ($i=1; $i<=$n_pages; $i++) {  // print links for all pages
 <table>
     <tr>
         <td>
-            <a href = <?php echo getPrevPage()?> > <<< </a> 
+            <a href = <?php echo getPrevPage()?> style="text-align:left" > &lt;&lt;&lt; </a> 
         </td>
-        <td> </td> <td> </td> <td> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td> <td> </td> <td> </td> <td> </td> 
+        <td style="text-align:center"> <?php echo "Pagina ".$_GET["page"]."/".$n_pages;?> </td>
         <td>
-            <a href = <?php echo getNextPage($n_pages)?> > >>> </a> 
+            <a href = <?php echo getNextPage($n_pages)?> style="text-align:right" > >>> </a> 
         </td>
     <tr>
   </table>

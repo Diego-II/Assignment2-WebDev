@@ -5,7 +5,8 @@ require_once('db_config.php');
 /** Create 'files_solicitudes' directory: */
 $cd = getcwd();
 if (!file_exists($cd . "/files_solicitudes")){
-    mkdir($cd . "/files_solicitudes", "0777");
+    mkdir($cd . "/files_solicitudes", "0777",true);
+    chmod($cd . "/files_solicitudes", 0777);
 }
 
 
@@ -58,24 +59,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sinSol = test_input($_POST["sintomas-solicitante"]);
 }
 
-//$nombreSol = test_input($_POST["nombre-solicitante"]);
-//$regionSol = test_input($_POST["region-solicitante"]);
-//$comunaSol = test_input($_POST["comuna-solicitante"]);
-//$celSol = test_input($_POST["celular-solicitante"]);
-//$mailSol = test_input($_POST["email-solicitante"]);
-//$twitSol = test_input($_POST["twitter-solicitante"]);
-//$sinSol = test_input($_POST["sintomas-solicitante"]);
-//$espSol = test_input($_POST["especialidad-solicitante"]);
-
-/**Upload adicional files: */
-/**Create dir for files: */
+/**Create dir for files: 
+ * Only create dir if there's a file
+*/
 $nameDir = str_replace(' ', '', $nombreSol);
 $cd = getcwd();
 if (!file_exists($cd . "/files_solicitudes//". $nameDir)){
-    mkdir($cd . "/files_solicitudes//". $nameDir, "0777");
+    mkdir($cd . "/files_solicitudes//". $nameDir, "0777", true);
+    chmod($cd . "/files_solicitudes//". $nameDir, 0777);
 }
 //One directory for each person
 $target_dir =  "files_solicitudes/". $nameDir. "/";
+
 
 //$allowed_file_extension = array("jpg","png","jpeg", "gif");
 $files_array = array();
@@ -87,6 +82,8 @@ foreach($_FILES as $file){
     if ($file["name"] == NULL){
     break;
     }
+    /**Upload adicional files: */
+
     $target_file = $target_dir . basename($file["name"]);
 
     $fileTypeArray[] = $file["type"];
